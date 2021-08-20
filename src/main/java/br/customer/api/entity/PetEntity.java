@@ -2,7 +2,6 @@ package br.customer.api.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +13,16 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="animal")
 public class PetEntity implements Serializable  {
@@ -35,8 +36,10 @@ public class PetEntity implements Serializable  {
 
     private String name;
 
+    
     @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName = "id", nullable=false)
+    @JoinColumn(name="customer_id")
     private CustomerEntity customer;
+
 
 }
