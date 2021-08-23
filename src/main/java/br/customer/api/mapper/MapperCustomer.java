@@ -59,7 +59,7 @@ public class MapperCustomer {
 
 
     private CustomerPresenter mapperCustomerEntity(CustomerEntity customerEntity) {
-
+        this.listAnimal = new ArrayList<PetPresenter>();
         customerEntity.getAnimal().forEach(x -> listAnimal.add(PetPresenter.builder().id(x.getId()).nameAnimal(x.getName()).build()));
         
         return CustomerPresenter.builder().id(customerEntity.getId())
