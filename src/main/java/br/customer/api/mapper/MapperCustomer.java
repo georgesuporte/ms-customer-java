@@ -1,8 +1,10 @@
 package br.customer.api.mapper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import br.customer.api.entity.CustomerEntity;
 import br.customer.api.entity.PetEntity;
@@ -15,7 +17,7 @@ public class MapperCustomer {
 
     private List<CustomerPresenter> listCustomer = new ArrayList<>();
 
-    private List<PetEntity> animal = new ArrayList<PetEntity>();
+    private Set<PetEntity> animal = new HashSet<PetEntity>();
 
     private List<PetPresenter> listAnimal = new ArrayList<PetPresenter>();
 
