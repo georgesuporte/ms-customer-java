@@ -3,6 +3,7 @@ package br.customer.api.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,13 +25,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="animal")
+@Table(name = "pet")
+@Embeddable
 public class PetEntity implements Serializable  {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,7 +40,7 @@ public class PetEntity implements Serializable  {
 
     
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
 
