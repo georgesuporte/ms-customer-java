@@ -1,6 +1,5 @@
 package br.customer.api.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +26,13 @@ public class CustomerService  {
 
 	@Transactional(rollbackFor = { TransactionException.class }, propagation = Propagation.REQUIRED)
 	public void save(CustomerEntity customerEntity) {
-		CustomerEntity client = repository.save(customerEntity);
+		try {
+			CustomerEntity client =  repository.save(customerEntity);
+			client.getAnimal().forEach(x -> petService.save(PetEntity.builder().id(x.getId()).name(x.getName()).customer(client).build()));
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
 
-		List<PetEntity> animal = new ArrayList<PetEntity>();
-		client.getAnimal().forEach(x -> animal.add(PetEntity.builder().id(x.getId()).name(x.getName()).customer(findById(client.getId()).get()).build()));
-		client.setAnimal(animal);
-		petService.saveAll(client.getAnimal());
 	}
 
 	public Optional<CustomerEntity> findById(Long id) {
