@@ -2,6 +2,7 @@ package br.customer.api.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.RollbackException;
 
@@ -39,9 +40,9 @@ public class PetService  {
 	}
 
 	@Transactional(rollbackFor =ServiceException.class)
-	public List<PetEntity> saveAll(List<PetEntity> listPet) {  
+	public List<PetEntity> saveAll(Set<PetEntity> set) {  
 		try {
-			return repository.saveAll(listPet);
+			return repository.saveAll(set);
 		} catch (Exception e) {
 			throw new RollbackException("Erro ao cadastrar cliente. Exception:[" + e.getMessage() + "]"); 
 		}
