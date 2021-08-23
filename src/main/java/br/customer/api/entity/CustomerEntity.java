@@ -1,12 +1,10 @@
 package br.customer.api.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,13 +23,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class CustomerEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -39,6 +37,6 @@ public class CustomerEntity implements Serializable {
     private String rg;
     private String cpf;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<PetEntity> animal;
+    @OneToMany(mappedBy = "customer")
+    private Set<PetEntity> animal;
 }
