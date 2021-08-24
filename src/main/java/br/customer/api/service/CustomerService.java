@@ -26,12 +26,8 @@ public class CustomerService  {
 
 	@Transactional(rollbackFor = { TransactionException.class }, propagation = Propagation.REQUIRED)
 	public void save(CustomerEntity customerEntity) {
-		try {
-			CustomerEntity client =  repository.save(customerEntity);
-			client.getAnimal().forEach(x -> petService.save(PetEntity.builder().id(x.getId()).name(x.getName()).customer(client).build()));
-		}catch(Exception ex) {
-			ex.getMessage();
-		}
+		CustomerEntity client =  repository.saveAndFlush(customerEntity);
+		client.getAnimal().forEach(x -> petService.save(PetEntity.builder().id(x.getId()).name(x.getName()).customer(client).build()));
 
 	}
 
